@@ -1,7 +1,7 @@
 const corsOptions = {
   origin: [
     "http://localhost:5173",
-    "https://chatapp-frontend-pwga5e9mm-shivis-projects-6fbccb47.vercel.app",
+    "https://chatapp-frontend-ten-sage.vercel.app",
     process.env.CLIENT_URL,
   ],
   methods: ["GET", "POST", "PUT", "DELETE"],

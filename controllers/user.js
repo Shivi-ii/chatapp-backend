@@ -15,7 +15,7 @@ import { ErrorHandler } from "../utils/utility.js";
 
 // Create a new user and save it to the database and save token in cookie
 const newUser = TryCatch(async (req, res, next) => {
-  const { name, username, password, bio } = req.body;
+  const {email, name, username, password, bio } = req.body;
 
   const file = req.file;
 
@@ -29,6 +29,7 @@ const newUser = TryCatch(async (req, res, next) => {
   };
 
   const user = await User.create({
+    email,
     name,
     bio,
     username,
@@ -87,7 +88,7 @@ const searchUser = TryCatch(async (req, res) => {
 
   // Finding all users except me and my friends
   const allUsersExceptMeAndFriends = await User.find({
-    _id: { $nin: allUsersFromMyChats },
+    _id: { $nin: [...allUsersFromMyChats, req.user] },
     name: { $regex: name, $options: "i" },
   });
 
